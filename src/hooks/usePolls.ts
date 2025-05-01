@@ -70,7 +70,7 @@ export const usePolls = (userId?: string) => {
       
       // Step 2: Create the options
       const optionsToInsert = optionLabels.map(label => ({
-        poll_id: poll.id,
+        poll_id: poll?.id,
         label
       }));
       

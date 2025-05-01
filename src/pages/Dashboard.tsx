@@ -42,7 +42,11 @@ const Dashboard = () => {
       });
       
       setIsCreating(false);
-      navigate(`/poll/${poll.id}`);
+      
+      // Check if poll exists before navigating
+      if (poll && poll.id) {
+        navigate(`/poll/${poll.id}`);
+      }
     } catch (err: any) {
       setError(err.message);
     } finally {

@@ -9,10 +9,118 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      options: {
+        Row: {
+          id: string
+          label: string
+          poll_id: string | null
+        }
+        Insert: {
+          id?: string
+          label: string
+          poll_id?: string | null
+        }
+        Update: {
+          id?: string
+          label?: string
+          poll_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "options_poll_id_fkey"
+            columns: ["poll_id"]
+            isOneToOne: false
+            referencedRelation: "polls"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      polls: {
+        Row: {
+          created_at: string
+          id: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      votes: {
+        Row: {
+          created_at: string
+          id: number
+          option_id: string | null
+          poll_id: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          option_id?: string | null
+          poll_id?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          option_id?: string | null
+          poll_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "votes_option_id_fkey"
+            columns: ["option_id"]
+            isOneToOne: false
+            referencedRelation: "option_votes"
+            referencedColumns: ["option_id"]
+          },
+          {
+            foreignKeyName: "votes_option_id_fkey"
+            columns: ["option_id"]
+            isOneToOne: false
+            referencedRelation: "options"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "votes_poll_id_fkey"
+            columns: ["poll_id"]
+            isOneToOne: false
+            referencedRelation: "polls"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
-      [_ in never]: never
+      option_votes: {
+        Row: {
+          label: string | null
+          option_id: string | null
+          poll_id: string | null
+          votes_count: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "options_poll_id_fkey"
+            columns: ["poll_id"]
+            isOneToOne: false
+            referencedRelation: "polls"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       [_ in never]: never
