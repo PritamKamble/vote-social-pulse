@@ -42,7 +42,10 @@ const AppLayout: React.FC = () => {
   
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar user={user} onLogout={handleLogout} />
+      <Navbar 
+        user={user ? { email: user.email || '' } : null} 
+        onLogout={handleLogout} 
+      />
       <main className="flex-grow">
         <Outlet />
       </main>
