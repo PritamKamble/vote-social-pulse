@@ -2,9 +2,10 @@
 import { createClient } from '@supabase/supabase-js';
 import { Database } from '../types/database';
 
-// These would be replaced with actual environment variables in a production app
-const supabaseUrl = 'YOUR_SUPABASE_URL';
-const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+// For local development, replace these with your actual Supabase credentials
+// In production, these would come from environment variables
+const supabaseUrl = 'https://your-project.supabase.co';
+const supabaseAnonKey = 'your-anon-key';
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
 
